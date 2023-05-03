@@ -1,0 +1,207 @@
+import { View, Text, text, StatusBar, TouchableOpacity, TextInput, ScrollView, } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Button, IconButton, Icon,AvatarIconProps, Avatar } from 'react-native-paper'
+import { colors, defaultStyle } from "../../styles";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as ImagePicker from 'expo-image-picker';
+import { defaultImg } from '../../styles';
+// import { Avatar } from '@rneui/themed';
+import { collection, setDoc,doc} from "firebase/firestore";
+import { auth, db } from "../../config/firebase"
+import { Alert } from 'react-native';
+
+const EditProfile = ({ navigation, route }) => {
+    const [firstname, setFirstname] = useState(null);
+    const [lastname, setLastname] = useState(null);
+    const [image, setImage] = useState("");
+  
+  
+    const saveData = async () => {
+      await setDoc(doc(db, "users", auth.currentUser.uid), {
+        FirstName: firstname,
+        Lastname: lastname
+      })
+      .then(()=>{
+        alert("Your Profile is update");
+      });
+    }
+    // if (avatar !== "") {
+    //   myForm.append("file", {
+    //     uri: avatar,
+    //     type: mime.getType(avatar),
+    //     name: avatar.split("/").pop(),
+    //   })
+     
+    // }
+  
+    useEffect(() => {
+      if (route.params?.image) {
+        setImage(route.params.image);
+        // dispatch updatePic Here
+        // const myForm = new FormData();
+        // myForm.append("file", {
+        //   uri: route.params.image,
+        //   type: mime.getType(route.params.image),
+        //   name: route.params.image.split("/").pop(),
+        // });
+       
+      }
+  
+    }, [route.params]);
+  
+  
+    // useEffect(() => {
+    //   if (user?.avatar) {
+    //     setAvatar(user.avatar.url);
+    //   }
+    // }, [user]);
+  
+    return (
+      <>
+        <View style={{
+          padding: 35,
+          paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+          flex: 1,
+          padding: 0,
+          flexDirection: 'column',
+          alignItems: 'center',
+          backgroundColor: 'black'
+        }}>
+          <IconButton style={{ marginLeft: -300, marginTop: 40, top: -30 }} icon={"arrow-left"} onPress={() => navigation.navigate('login')} />
+          <Text style={{ color: 'white', textAlign: 'center', marginTop: -75, fontSize: 25, fontWeight: '700' }}>  Edit Photo   </Text>
+          {/* <IconButton style={{alignSelf:'flex-end',flexDirection:'row',marginRight:39,bottom:-60,}}iconColor={'#1BA9AD'} size={25} icon={'camera'}/>
+        <IconButton style={{alignSelf:'flex-end',marginRight:12,bottom:-6}}iconColor={'#1BA9AD'} size={25} icon={'plus-circle'}/> */}
+  
+        </View>
+        <View style={{
+          backgroundColor: 'white',
+          padding: 35,
+          flex: 1,
+          marginTop: -380,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+        }}>
+  
+          <View
+            style={{
+              alignSelf: 'center',
+              borderRadius: 100,
+              size: 150,
+              marginTop: -110,
+              backgroundColor: 'gray'
+            }}
+          >
+            
+            <TouchableOpacity onPress={() =>
+              navigation.navigate("camera",{Profile:true})}>
+              <Avatar.Image
+                size={150}
+                rounded 
+                source={{
+                  uri: image ? image : defaultImg,
+                }} />
+            </TouchableOpacity>
+          </View>
+  
+  
+  
+  <ScrollView style={{marginTop:20}}>
+          {/* <IconButton style={{ alignSelf: 'flex-end', top: -95 }} size={25} iconColor={'#1BA9AD'} icon={'camera'}
+          // onPress={() =>
+          //   navigation.navigate("camera", { updateCoverPhoto: true })} 
+          />
+          <IconButton style={{ alignSelf: 'flex-end', flexDirection: 'column', top: -148, marginRight: -25, }} size={25} iconColor={'#1BA9AD'} icon={'plus-circle'} /> */}
+          <Text style={{ marginTop: 70, fontSize: 15, fontWeight: '900', paddingLeft: 5 }} >First Name</Text>
+          <TextInput
+            style={{ marginTop: 5, borderWidth: 1, height: 50, borderRadius: 5, paddingLeft: 10, borderColor: 'gray' }}
+            mode="outlined"
+            onChangeText={(text) => setFirstname(text)}
+            placeholder="Enter Your First Name"
+            
+  
+          />
+          <Text style={{ marginTop: 20, fontSize: 15, fontWeight: '900', borderColor: 'gray', paddingLeft: 5 }} >Last Name</Text>
+          <TextInput
+            style={{ marginTop: 5, borderWidth: 1, height: 50, borderRadius: 5, paddingLeft: 10, borderColor: 'gray' }}
+            mode="outlined"
+            placeholderTextColor={'gray'}
+            placeholder="Enter Your Last Name"
+            onChangeText={(text) => setLastname(text)}
+  
+          />
+           <Text style={{ marginTop: 20, fontSize: 15, fontWeight: '900', borderColor: 'gray', paddingLeft: 5 }} >Update Email</Text>
+          <TextInput
+            style={{ marginTop: 5, borderWidth: 1, height: 50, borderRadius: 5, paddingLeft: 10, borderColor: 'gray' }}
+            mode="outlined"
+            placeholderTextColor={'gray'}
+            placeholder="name@gmail.com"
+            onChangeText={(text) => setLastname(text)}
+  
+          />
+           <Text style={{ marginTop: 20, fontSize: 15, fontWeight: '900', borderColor: 'gray', paddingLeft: 5 }} >Update Phone</Text>
+          <TextInput
+            style={{ marginTop: 5, borderWidth: 1, height: 50, borderRadius: 5, paddingLeft: 10, borderColor: 'gray' }}
+            mode="outlined"
+            placeholderTextColor={'gray'}
+            placeholder="+97250010101010"
+            onChangeText={(text) => setLastname(text)}
+  
+          />
+  
+          <Button style={{ marginTop: 20, backgroundColor: '#1BA9AD', paddingTop: 5, borderRadius: 5 }} height={50}
+            mode="contained"
+            placeholderTextColor={'gray'}
+            onPress={() => saveData()
+              .then(() => navigation.navigate("received"))
+              .catch((err) => Alert.alert("firestore", err.message))}>
+           update detail
+          </Button>
+          <Button style={{ marginTop: 30, backgroundColor: '#1BA9AD', paddingTop: 5, borderRadius: 5 }} height={50}
+            mode="contained"
+            placeholderTextColor={'gray'}
+           >
+            Auto Delete Tasks
+          
+           </Button>
+          <Button style={{ marginTop: 10, backgroundColor: '#1BA9AD', paddingTop: 5, borderRadius: 5 }} height={50}
+            mode="contained"
+            placeholderTextColor={'gray'}
+           >
+            Terms & conditions 
+           </Button>
+
+          
+          <Button style={{ marginTop: 10, backgroundColor: '#1BA9AD', paddingTop: 5, borderRadius: 5 }} height={50}
+            mode="contained"
+            placeholderTextColor={'gray'}
+           >
+           Delete Account 
+           </Button>
+           <Button style={{ marginTop: 10, backgroundColor: '#1BA9AD', paddingTop: 5, borderRadius: 5 }} height={50}
+            mode="contained"
+            placeholderTextColor={'gray'}
+           >
+           Privacy & policy  
+           </Button>
+           <Button style={{ marginTop: 10, backgroundColor: '#1BA9AD', paddingTop: 5, borderRadius: 5 }} height={50}
+            mode="contained"
+            placeholderTextColor={'gray'}
+           >
+          Language
+           </Button>
+           <Button style={{ marginTop: 10, backgroundColor: '#1BA9AD', paddingTop: 5, borderRadius: 5 }} height={50}
+            mode="contained"
+            placeholderTextColor={'gray'}
+           >
+           Notification
+           </Button>
+          </ScrollView>
+        </View>
+       
+  
+      </>
+    )
+  }
+
+export default EditProfile
