@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-export default{
+export default {
   "expo": {
     "name": "Task-Me",
     "slug": "Task-Me",
@@ -21,14 +21,15 @@ export default{
     },
     "android": {
       "adaptiveIcon": {
+        "package": "com.Task-Me",
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffffff",
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    extra:{
+    extra: {
       apiKey: "AIzaSyAFuY9paoVyQ8EWmvaz_ZepzQIF_vmJiHg",
       authDomain: "task-me-59351.firebaseapp.com",
       projectId: "task-me-59351",

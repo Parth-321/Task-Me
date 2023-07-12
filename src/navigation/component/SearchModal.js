@@ -1,5 +1,5 @@
 import { View, Text,StatusBar } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,6 +9,7 @@ import { Searchbar } from 'react-native-paper';
 
 const SearchModal = ({searchQuery, setActiveSearch, setSearchQuery,users=[], }) => {
     const navigation=useNavigation();
+
   return (
     <View 
     style={{width:"100%",height:"100%",

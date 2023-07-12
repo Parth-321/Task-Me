@@ -29,13 +29,13 @@ const Signup = ({ navigation }) => {
       alignItems: 'center',
       backgroundColor: 'black'
     }}>
-      <IconButton style={{ marginLeft: -300, marginTop: 40,top:42 }} icon={"arrow-left"} onPress={() => navigation.navigate('login')} />
+      <IconButton style={{ marginLeft: -300, marginTop: 40,top:42 }} icon={"arrow-left"} onPress={() => navigation.navigate('home')} />
         <Text style={{ color: 'white', textAlign: 'center', marginTop: 0, fontSize: 25, fontWeight: '700' }}>  Sign Up Account  </Text>
         <Text style={{ color: 'white', textAlign: 'center', marginTop: 10, fontSize: 15, fontWeight: '700' }}> Create New  Account! </Text>
      </View> 
 
       <View style={{
-        backgroundColor: 'white',
+        backgroundColor: '#F9F1F0',
         padding: 35,
         flex: 1,
         marginTop: -380,
@@ -65,12 +65,7 @@ const Signup = ({ navigation }) => {
           textContentType="password"
           onChangeText={(text) => setPassword(text)}
         />
-         {/* <TouchableOpacity style={{  backgroundColor: '#000000',height: 58,
-    borderRadius: 10, justifyContent: 'center',  alignItems: 'center',marginTop: 40,}} 
-    onPress={(onHandleSignup)=>navigation.navigate("profile")}
-    >
-        <Text style={{fontWeight: 'bold', color: '#FFFFFF', fontSize: 18}}>  Sign Up</Text>
-      </TouchableOpacity> */}
+       
         <Button 
         
         // disabled={email==""||password==""}

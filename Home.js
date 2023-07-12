@@ -19,7 +19,7 @@ const Home = ({ navigation }) => {
         padding: 0,
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'white'
+        backgroundColor: '#F9F1F0'
       }}>
       {/* <StatusBar hidden={true}/> */}
       

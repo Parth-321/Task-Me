@@ -4,7 +4,7 @@ import { useState, useRef } from "react-native";
 
 import { getAuth, signOut } from 'firebase/auth';
 import { auth } from "./config/firebase"
-import  { TextInput, Button, IconButton, Menu, Divider, Provider } from 'react-native-paper'
+import  { TextInput, Button, IconButton,Provider} from 'react-native-paper'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ScrollView } from 'react-native';
@@ -15,12 +15,14 @@ import ChatsScreen from './src/screens/ChatsScreen';
 import { Pressable } from 'react-native';
 import SearchModal from './src/navigation/component/SearchModal';
 import { ListItem,Avatar } from 'react-native-elements';
+import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
 
 const Received = ({ navigation,chats }) => {
   const [visible, setVisible] = React.useState(false);
   // const[activeSearch, setActiveSearch]= useState(false);
   // const[searchQuery, setSearchQuery]= useState("");
-  const openMenu = () => setVisible(true);
+  const showMenu = () => setVisible(true);
+  const hideMenu = () => setVisible(false);
  
   const users=[]
 
@@ -73,17 +75,18 @@ const Received = ({ navigation,chats }) => {
                 onPress={() => navigation.navigate('user')}
               />
             </TouchableOpacity>
-            <View>
-            <Menu style={{ flex: 1, marginTop: -100, marginLeft: -30, }}
+            <View >
+            <Menu
               backgroundColor={'white'}
               visible={visible}
-              onDismiss={closeMenu}
+              onRequestClose={hideMenu}
+              animationDuration={0}
            
-              anchor={<IconButton iconColor='white' icon={"dots-horizontal"} onPress={openMenu}></IconButton>}
+              anchor={<IconButton iconColor='white' icon={"dots-horizontal"} onPress={showMenu}></IconButton>}
             >
-              <Menu.Item   onPress={() => navigation.navigate('summarize')} title=" Summarize" />
-              <Menu.Item onPress={() => navigation.navigate('settings')} title="Settings" />
-              <Menu.Item onPress={() => onHandleLogout()} title="Logout" />
+              <MenuItem   onPress={() => navigation.navigate('summarize')} >Summarize</MenuItem>
+              <MenuItem onPress={() => navigation.navigate('editprofile')}  >Settings</MenuItem>
+              <MenuItem onPress={() => onHandleLogout()}  >Logout</MenuItem>
             </Menu>
             </View>
           </View>
@@ -115,7 +118,8 @@ const Received = ({ navigation,chats }) => {
 const Styles = StyleSheet.create({
   container: {
     marginTop: 50
-  }
+  },
+
 })
 
 export default Received

@@ -35,13 +35,13 @@ const Login = ({ navigation }) => {
         alignItems: 'center',
         backgroundColor: 'black'
       }}>
-        <IconButton style={{ marginLeft: -300, marginTop: 40, top: 42 }} icon={"arrow-left"} onPress={() => navigation.navigate('login')} />
+        <IconButton style={{ marginLeft: -300, marginTop: 40, top: 42 }} icon={"arrow-left"} onPress={() => navigation.navigate('home')} />
         <Text style={{ color: 'white', textAlign: 'center', marginTop: 0, fontSize: 25, fontWeight: '700' }}>  Login Account  </Text>
         <Text style={{ color: 'white', textAlign: 'center', marginTop: 10, fontSize: 15, fontWeight: '700' }}> Hello, Welcome Back to Account! </Text>
       </View>
 
       <View style={{
-        backgroundColor: 'white',
+        backgroundColor: '#F9F1F0',
         padding: 35,
         flex: 1,
         marginTop: -380,
@@ -73,11 +73,7 @@ const Login = ({ navigation }) => {
           textContentType="password"
           onChangeText={(text) => setPassword(text)}
         />
-        {/* <TouchableOpacity style={{  backgroundColor: '#000000',height: 58,
-    borderRadius: 10, justifyContent: 'center',  alignItems: 'center',marginTop: 40,}} 
-    onPress={(onHandleLogin)=> navigation.navigate("received")}>
-        <Text style={{fontWeight: 'bold', color: '#FFFFFF', fontSize: 18}}> Log In</Text>
-      </TouchableOpacity> */}
+       
         <Button
 
           //  disabled={email==""||password==""}

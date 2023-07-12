@@ -75,13 +75,11 @@ const Profile = ({ navigation, route }) => {
         backgroundColor: 'black'
       }}>
         <IconButton style={{ marginLeft: -300, marginTop: 40, top: 0 }} icon={"arrow-left"} onPress={() => navigation.navigate('login')} />
-        <Text style={{ color: 'white', textAlign: 'center', marginTop: -40, fontSize: 25, fontWeight: '700' }}>  Cover Photo   </Text>
-        {/* <IconButton style={{alignSelf:'flex-end',flexDirection:'row',marginRight:39,bottom:-60,}}iconColor={'#1BA9AD'} size={25} icon={'camera'}/>
-      <IconButton style={{alignSelf:'flex-end',marginRight:12,bottom:-6}}iconColor={'#1BA9AD'} size={25} icon={'plus-circle'}/> */}
-
+        <Text style={{ color: 'white', textAlign: 'center', marginTop: -50, fontSize: 25, fontWeight: '700' }}>  Cover Photo   </Text>
+       
       </View>
       <View style={{
-        backgroundColor: 'white',
+        backgroundColor: '#F9F1F0',
         padding: 35,
         flex: 1,
         marginTop: -380,
@@ -94,7 +92,7 @@ const Profile = ({ navigation, route }) => {
             alignSelf: 'center',
             borderRadius: 100,
             size: 150,
-            marginTop: -110,
+            marginTop: -90,
             backgroundColor: 'gray'
           }}
         >
@@ -102,7 +100,7 @@ const Profile = ({ navigation, route }) => {
           <TouchableOpacity onPress={() =>
             navigation.navigate("camera",{Profile:true})}>
             <Avatar.Image
-              size={150}
+              size={125}
               rounded 
               source={{
                 uri: image ? image : defaultImg,
@@ -113,11 +111,7 @@ const Profile = ({ navigation, route }) => {
 
 
 
-        {/* <IconButton style={{ alignSelf: 'flex-end', top: -95 }} size={25} iconColor={'#1BA9AD'} icon={'camera'}
-        // onPress={() =>
-        //   navigation.navigate("camera", { updateCoverPhoto: true })} 
-        />
-        <IconButton style={{ alignSelf: 'flex-end', flexDirection: 'column', top: -148, marginRight: -25, }} size={25} iconColor={'#1BA9AD'} icon={'plus-circle'} /> */}
+        
         <Text style={{ marginTop: 70, fontSize: 15, fontWeight: '900', paddingLeft: 5 }} >First Name</Text>
         <TextInput
           style={{ marginTop: 5, borderWidth: 1, height: 50, borderRadius: 5, paddingLeft: 10, borderColor: 'gray' }}
